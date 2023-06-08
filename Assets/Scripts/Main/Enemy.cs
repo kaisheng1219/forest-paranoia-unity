@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
         if (player.transform.position.z > transform.position.z + 3)
         {
             Destroy(gameObject, 3f);
+        } else
+        {
+            Destroy(gameObject, 5f);
         }
     }
 

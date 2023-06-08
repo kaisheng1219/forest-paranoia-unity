@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour
     private GameObject boss;
     private GameObject tutorial;
     private GameObject speech;
+    private Vector3 startingPosition;
 
     private enum Direction
     {
@@ -31,6 +32,7 @@ public class PlayerInput : MonoBehaviour
         tutorial = GameObject.Find("Tutorial");
         speech = GameObject.Find("Speech");
         speechControl = speech.GetComponent<SpeechControl>();
+        startingPosition = transform.position;
 
         midX = Screen.width / 2;
         midOffset = 75f;
@@ -84,5 +86,11 @@ public class PlayerInput : MonoBehaviour
             transform.Translate(new Vector3(1f, 0, 1f), Space.Self);
         else
             transform.Translate(new Vector3(0, 0, 1f), Space.Self);
+    }
+
+    public void Reset()
+    {
+        weatherControl.StartWeather();
+        transform.position = startingPosition;
     }
 }

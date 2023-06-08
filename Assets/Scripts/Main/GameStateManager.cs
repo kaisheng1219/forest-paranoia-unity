@@ -46,5 +46,6 @@ public class GameStateManager : MonoBehaviour
         GameState = State.Initialized;
         GameDifficulty = Difficulty.Easy;
         GameTime = 0;
+        Time.timeScale = 1f;
     }
 }

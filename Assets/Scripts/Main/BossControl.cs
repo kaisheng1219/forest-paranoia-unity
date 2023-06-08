@@ -9,12 +9,14 @@ public class BossControl : MonoBehaviour
 
     private AudioSource playerAudio;
     private bool canSayIntro;
-    private float speed = 2f;
+    private float speed = 12f;
+    private Vector3 startingPosition;
 
     void Start()
     {
         playerAudio = playerSpeech.GetComponent<AudioSource>();
         canSayIntro = true;
+        startingPosition = transform.position;
     }
 
     void Update()
@@ -38,7 +40,7 @@ public class BossControl : MonoBehaviour
                 Vector3 direction = player.transform.position - transform.position;
                 transform.position += speed * Time.deltaTime * direction.normalized;
             }
-        }
+        } 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,5 +49,10 @@ public class BossControl : MonoBehaviour
         {
             GameStateManager.GameState = GameStateManager.State.Ended;
         }
+    }
+
+    public void Reset()
+    {
+        transform.position = startingPosition;
     }
 }
