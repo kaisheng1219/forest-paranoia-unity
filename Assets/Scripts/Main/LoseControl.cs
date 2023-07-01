@@ -20,19 +20,17 @@ public class LoseControl : MonoBehaviour
         losePanel.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameStateManager.GameState == GameStateManager.State.Ended && !gameEnded)
         {
-            GetComponent<AudioSource>().Play();
             allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
             foreach (var source in allAudioSources)
             {
-                if (source.clip.name != "chew")
-                    source.Stop();
+                //if (source.clip.name != "chew")
+                source.Stop();
             }
-
+            GetComponent<AudioSource>().Play();
             losePanel.SetActive(true);
             string minutes = TimeSpan.FromSeconds(GameStateManager.GameTime).ToString("mm");
             string seconds = TimeSpan.FromSeconds(GameStateManager.GameTime).ToString("ss");
@@ -45,18 +43,17 @@ public class LoseControl : MonoBehaviour
     public void ExitToMainMenu()
     {
         GetComponent<AudioSource>().Stop();
+        Time.timeScale = 1;
         GameStateManager.Reset();
-        SceneManager.LoadScene(1);
+        SceneChanger.Instance.SwitchScene("MainMenu");
     }
 
     public void Restart()
     {
-        GameStateManager.Reset();
+        Time.timeScale = 1;
         GetComponent<AudioSource>().Stop();
-        losePanel.SetActive(false);
-        bossControl.Reset();
-        player.Reset();
-        gameEnded = false;
-        GameStateManager.GameState = GameStateManager.State.Started;
+        GameStateManager.Reset();
+        SceneChanger.Instance.SwitchScene("Game");
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

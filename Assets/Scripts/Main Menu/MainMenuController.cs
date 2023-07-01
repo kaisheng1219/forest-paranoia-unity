@@ -1,13 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    
+    private void Awake()
+    {
+        SceneChanger.Instance.InitScene();
+    }
+
     public void StartGame()
     {
-        SceneManager.LoadScene(2);
+        SceneChanger.Instance.SwitchScene("Tutorial");
     }
 
     public void ExitGame()
